@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakshmi Medical Agency | Trusted Medical Distributor in Ghazipur</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="top-bar bg-dark text-white py-2 d-none d-lg-block">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="small">
+                <i class="fas fa-certificate text-success me-2"></i> Govt. Approved & Licensed Distributor
+            </div>
+            <div class="small">
+                <span class="me-3"><i class="fas fa-phone-alt me-2 text-primary-light"></i> +91 96484 23933</span>
+                <span><i class="fas fa-envelope me-2 text-primary-light"></i> dhananjaykushwaha491@gmail.com</span>
+            </div>
+        </div>
+    </div>
+
+   <nav class="navbar navbar-expand-lg sticky-top bg-white shadow-sm" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <i class="fas fa-clinic-medical text-primary fa-2x me-2"></i>
+            <div class="d-flex flex-column">
+                <span class="fw-bold text-dark fs-5 lh-1 text-uppercase">Lakshmi Medical Agency</span>
+                <span class="text-muted small" style="font-size: 0.65rem; letter-spacing: 1px;">Prop. Dhananjay Singh Kushwaha</span>
+            </div>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center">
+                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="product.html">Products</a></li>
+                <li class="nav-item"><a class="nav-link" href="#features">Why Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="#compliance">Licenses</a></li>
+                <li class="nav-item"><a class="nav-link" href="#inquiry">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                <li class="nav-item ms-lg-2" id="authLinks">
+                    <a class="nav-link cursor-pointer fw-bold text-primary" href="#" data-bs-toggle="modal" data-bs-target="#authModal">
+                        <i class="fas fa-user-circle me-1"></i> Login / Register
+                    </a>
+                </li>
+
+    <li class="nav-item dropdown ms-lg-3 d-none" id="userProfile">
+    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="border: none; background: transparent;">
+        
+        <img src="" id="navUserImage" class="rounded-circle shadow-sm object-fit-cover d-none" style="width: 40px; height: 40px;">
+        
+        <div id="navUserIcon" class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 40px; height: 40px;">
+            <i class="fas fa-user"></i>
+        </div>
+    </a>
+    
+    <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 mt-2 p-0 overflow-hidden" style="min-width: 250px;">
+        <li class="bg-light p-3 border-bottom text-center">
+            
+            <img src="" id="dropdownUserImage" class="rounded-circle shadow-sm object-fit-cover mx-auto mb-2 d-none" style="width: 60px; height: 60px;">
+            
+            <div id="dropdownUserIcon" class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mx-auto mb-2" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                <i class="fas fa-user"></i>
+            </div>
+
+            <h6 class="fw-bold mb-0 text-dark" id="dropdownUserName">User Name</h6>
+            <small class="text-muted">Registered Client</small>
+        </li>
+
+        <li class="p-2">
+            <a class="dropdown-item rounded py-2" href="profile.html">
+                <i class="fas fa-id-card me-2 text-primary"></i> View Profile
+            </a>
+            <a class="dropdown-item rounded py-2" href="profile.html">
+                <i class="fas fa-pen me-2 text-warning"></i> Edit Details
+            </a>
+            <a class="dropdown-item rounded py-2" href="#">
+                <i class="fas fa-box-open me-2 text-success"></i> My Orders
+            </a>
+        </li>
+        
+        <li><hr class="dropdown-divider m-0"></li>
+        
+        <li class="p-2">
+            <a class="dropdown-item rounded py-2 text-danger fw-bold" href="#" id="logoutBtn">
+                <i class="fas fa-sign-out-alt me-2"></i> Logout
+            </a>
+        </li>
+    </ul>
+</li>
+                <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                    <a href="#inquiry" class="btn btn-primary px-4 fw-medium">Call Now</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="modal fade" id="authModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg">
+            <div class="modal-header bg-primary text-white border-0">
+                <h5 class="modal-title fw-bold" id="authModalLabel">
+                    <i class="fas fa-lock me-2"></i> Client Access
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                
+                <div id="loginContainer">
+                    <h4 class="fw-bold text-dark mb-1">Welcome Back</h4>
+                    <p class="text-muted small mb-4">Login to view wholesale price lists.</p>
+                    
+                    <form id="loginForm">
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="loginEmail" placeholder="name@example.com" required>
+                            <label for="loginEmail">Email address</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="loginPassword" placeholder="Password" required>
+                            <label for="loginPassword">Password</label>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="rememberMe">
+                                <label class="form-check-label small" for="rememberMe">Remember me</label>
+                            </div>
+                            <a href="#" class="small text-decoration-none">Forgot password?</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 py-2 fw-bold mb-3">Login</button>
+                    </form>
+                    
+                    <div class="text-center">
+                        <span class="text-muted small">New Client? </span>
+                        <a href="#" class="fw-bold text-primary text-decoration-none" id="showRegister">Register Business</a>
+                    </div>
+                </div>
+
+                <div id="registerContainer" class="d-none">
+                    <h4 class="fw-bold text-dark mb-1">Business Registration</h4>
+                    <p class="text-muted small mb-4">Create account for Lakshmi Medical Agency.</p>
+                    
+                    <form id="registerForm">
+                        <div class="row g-2 mb-2">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="regName" placeholder="Name" required>
+                                    <label for="regName">Owner Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="regShop" placeholder="Shop" required>
+                                    <label for="regShop">Shop/Hospital Name</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-floating mb-2">
+                            <input type="email" class="form-control" id="regEmail" placeholder="name@example.com" required>
+                            <label for="regEmail">Email address</label>
+                        </div>
+                        <div class="form-floating mb-2">
+                            <input type="text" class="form-control" id="regLicense" placeholder="DL No" required>
+                            <label for="regLicense">Drug License / GST No.</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="regPassword" placeholder="Password" required>
+                            <label for="regPassword">Create Password</label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-success w-100 py-2 fw-bold mb-3">Create Account</button>
+                    </form>
+                    
+                    <div class="text-center">
+                        <span class="text-muted small">Already registered? </span>
+                        <a href="#" class="fw-bold text-primary text-decoration-none" id="showLogin">Login Here</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+    <header id="hero" class="hero-section position-relative overflow-hidden">
+        
+        <div id="heroCarousel" class="carousel slide carousel-fade position-absolute w-100 h-100 top-0 start-0" data-bs-ride="carousel" data-bs-interval="5000" data-bs-pause="false">
+            <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">
+                    <img src="https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=1920&q=80" class="d-block w-100 h-100" alt="Medical Warehouse">
+                </div>
+                <div class="carousel-item h-100">
+                    <img src="https://images.unsplash.com/photo-1631549916768-4119b2e5f926?auto=format&fit=crop&w=1920&q=80" class="d-block w-100 h-100" alt="Pharmacy Stock">
+                </div>
+                <div class="carousel-item h-100">
+                    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1920&q=80" class="d-block w-100 h-100" alt="Laboratory">
+                </div>
+            </div>
+        </div>
+
+        <div class="overlay position-absolute top-0 start-0 w-100 h-100 z-1"></div>
+
+        <div class="container position-relative z-2 d-flex align-items-center h-100">
+            <div class="row w-100">
+                <div class="col-lg-8">
+                    <span class="badge bg-success mb-3 px-3 py-2 rounded-1 shadow-sm">Serving Ghazipur & Beyond</span>
+                    <h1 class="display-4 fw-bold text-white mb-4 animate-up">Lakshmi Medical Agency</h1>
+                    <h2 class="h3 text-white-50 mb-4 animate-up delay-1">Your Trusted Partner for Generic & Branded Medicines</h2>
+                    <p class="lead text-white-50 mb-5 animate-up delay-2">We supply genuine high-quality medicines, surgical items, and healthcare products to pharmacies and hospitals. Authorized and fully compliant.</p>
+                    <div class="d-flex gap-3 flex-wrap animate-up delay-3">
+                        <a href="#inquiry" class="btn btn-light btn-lg px-5 fw-bold text-primary shadow-sm">Contact Us</a>
+                        <a href="#categories" class="btn btn-outline-light btn-lg px-5 fw-bold">Our Products</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="bg-primary text-white py-4">
+        <div class="container">
+            <div class="row text-center g-4">
+                <div class="col-md-3 col-6 border-end border-white-50">
+                    <h3 class="fw-bold">100%</h3>
+                    <small>Genuine Medicines</small>
+                </div>
+                <div class="col-md-3 col-6 border-end border-white-50 border-md-0">
+                    <h3 class="fw-bold">Fair</h3>
+                    <small>Wholesale Prices</small>
+                </div>
+                <div class="col-md-3 col-6 border-end border-white-50">
+                    <h3 class="fw-bold">Fast</h3>
+                    <small>Delivery in UP</small>
+                </div>
+                <div class="col-md-3 col-6">
+                    <h3 class="fw-bold">Verified</h3>
+                    <small>Govt. Licensed</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="categories" class="py-5 bg-light">
+        <div class="container py-4">
+            <div class="text-center mb-5">
+                <h6 class="text-primary fw-bold text-uppercase ls-2">What We Supply</h6>
+                <h2 class="fw-bold text-dark">Our Product Range</h2>
+                <div class="divider mx-auto bg-primary mt-3"></div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="card category-card h-100 border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="icon-circle bg-primary-subtle text-primary mb-3">
+                                <i class="fas fa-pills fa-2x"></i>
+                            </div>
+                            <h4 class="fw-bold">Generic Medicines</h4>
+                            <p class="text-muted">High-quality and affordable generic medicines from trusted manufacturers.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="card category-card h-100 border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="icon-circle bg-success-subtle text-success mb-3">
+                                <i class="fas fa-prescription-bottle-alt fa-2x"></i>
+                            </div>
+                            <h4 class="fw-bold">Branded Drugs</h4>
+                            <p class="text-muted">Wide range of branded pharmaceutical products for all therapies.</p>
+                        </div>
+                    </div>
+                </div>
+
+               
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="card category-card h-100 border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="icon-circle bg-warning-subtle text-warning mb-3">
+                                <i class="fas fa-pump-medical fa-2x"></i>
+                            </div>
+                            <h4 class="fw-bold">Healthcare Products</h4>
+                            <p class="text-muted">Wellness products, nutritional supplements, and syrups.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                 <div class="col-lg-4 col-md-6">
+                    <div class="card category-card h-100 border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="icon-circle bg-danger-subtle text-danger mb-3">
+                                <i class="fas fa-leaf fa-2x"></i>
+                            </div>
+                            <h4 class="fw-bold">Ayurvedic Medicines</h4>
+                            <p class="text-muted">Trusted herbal and ayurvedic formulations.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="card category-card h-100 border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="icon-circle bg-dark-subtle text-dark mb-3">
+                                <i class="fas fa-vial fa-2x"></i>
+                            </div>
+                            <h4 class="fw-bold">Injectables</h4>
+                            <p class="text-muted">Safe and temperature-controlled storage for injectables.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h6 class="text-primary fw-bold text-uppercase ls-2">About Us</h6>
+                    <h2 class="fw-bold mb-4">Why Choose Lakshmi Medical Agency?</h2>
+                    <p class="text-muted mb-4">Owned by <strong>Dhananjay Singh Kushwaha</strong>, we are committed to providing the best service to medical stores and hospitals in Ghazipur and surrounding areas.</p>
+                    
+                    <div class="d-flex mb-4">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-check-circle text-primary fs-3"></i>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h5 class="fw-bold">Fully Compliant</h5>
+                            <p class="text-muted small">We operate with valid GST, FSSAI, and Drug Licenses.</p>
+                        </div>
+                    </div>
+                    <div class="d-flex mb-4">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-truck text-primary fs-3"></i>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h5 class="fw-bold">Reliable Supply</h5>
+                            <p class="text-muted small">Timely delivery to ensuring your medical store never runs out of stock.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1631549916768-4119b2e5f926?auto=format&fit=crop&w=800&q=80" class="img-fluid rounded-3 shadow-lg" alt="Medical Agency Warehouse">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="compliance" class="py-5 bg-dark text-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5 mb-4 mb-lg-0">
+                    <h3 class="fw-bold mb-3">Our Legal Information</h3>
+                    <p class="text-white-50">Lakshmi Medical Agency operates under strict government regulations to ensure safety and trust.</p>
+                </div>
+                <div class="col-lg-7">
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <div class="p-3 bg-white bg-opacity-10 rounded border border-white-50 d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fas fa-file-invoice-dollar text-primary me-2"></i> 
+                                    <span class="fw-bold">GST Number</span>
+                                </div>
+                                <span class="font-monospace bg-light text-dark px-2 rounded">09BLCPK7425FG1Z4</span>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="p-3 bg-white bg-opacity-10 rounded border border-white-50 d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fas fa-file-medical text-primary me-2"></i> 
+                                    <span class="fw-bold">Drug License No.</span>
+                                </div>
+                                <span class="font-monospace bg-light text-dark px-2 rounded">UP6120B000292</span>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="p-3 bg-white bg-opacity-10 rounded border border-white-50 d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fas fa-utensils text-primary me-2"></i> 
+                                    <span class="fw-bold">FSSAI License</span>
+                                </div>
+                                <span class="font-monospace bg-light text-dark px-2 rounded">22723404000208</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="inquiry" class="py-5 bg-light">
+        <div class="container py-4">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="card border-0 shadow-lg overflow-hidden">
+                        <div class="row g-0">
+                            <div class="col-md-5 bg-primary text-white p-5 d-flex flex-column justify-content-center">
+                                <h3 class="fw-bold mb-4">Contact Us</h3>
+                                <p class="mb-4 text-white-50">Reach out to us for wholesale inquiries or orders.</p>
+                                
+                                <div class="mb-4">
+                                    <div class="fw-bold"><i class="fas fa-user me-2"></i> Owner</div>
+                                    <div class="ms-4 small">Dhananjay Singh Kushwaha</div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <div class="fw-bold"><i class="fas fa-map-marker-alt me-2"></i> Address</div>
+                                    <div class="ms-4 small">
+                                        Village and Post Andhaun,<br>
+                                        Ghazipur, Uttar Pradesh<br>
+                                        Pin Code: 233305
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <div class="fw-bold"><i class="fas fa-phone me-2"></i> Phone</div>
+                                    <div class="ms-4 small">+91 96484 23933</div>
+                                </div>
+
+                                <div>
+                                    <div class="fw-bold"><i class="fas fa-envelope me-2"></i> Email</div>
+                                    <div class="ms-4 small">dhananjaykushwaha491@gmail.com</div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-7 p-5 bg-white">
+                                <h4 class="fw-bold text-dark mb-4">Send an Inquiry</h4>
+                                <form id="inquiryForm" class="needs-validation" novalidate>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" id="name" placeholder="Name" required>
+                                                <label for="name">Your Name</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="tel" class="form-control" id="phone" placeholder="Phone" required>
+                                                <label for="phone">Mobile Number</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control" id="shop" placeholder="Shop Name">
+                                                <label for="shop">Pharmacy/Hospital Name</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <textarea class="form-control" placeholder="Req" id="message" style="height: 100px"></textarea>
+                                                <label for="message">Your Message / Requirement</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button class="btn btn-primary w-100 py-3 fw-bold" type="submit">Send Message</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="bg-dark text-light pt-5 pb-3 border-top border-secondary">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-5 col-md-6">
+                    <h5 class="fw-bold text-white mb-3">Lakshmi Medical Agency</h5>
+                    <p class="text-white-50 small">Your trusted pharmaceutical partner in Ghazipur. We are committed to supplying high-quality generic and branded medicines at the best wholesale rates.</p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="fw-bold text-white mb-3">Quick Links</h6>
+                    <ul class="list-unstyled small text-white-50">
+                        <li class="mb-2"><a href="#hero" class="text-reset text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="#categories" class="text-reset text-decoration-none">Products</a></li>
+                        <li class="mb-2"><a href="#compliance" class="text-reset text-decoration-none">Our Licenses</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h6 class="fw-bold text-white mb-3">Visit Us</h6>
+                    <ul class="list-unstyled small text-white-50">
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2 text-primary"></i> Vill & Post Andhaun, Ghazipur, UP - 233305</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2 text-primary"></i> +91 96484 23933</li>
+                        <li class="mb-2"><i class="fas fa-envelope me-2 text-primary"></i> dhananjaykushwaha491@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="border-secondary my-4">
+            <div class="text-center">
+                <small class="text-white-50">&copy; 2024 Lakshmi Medical Agency. All rights reserved.</small>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

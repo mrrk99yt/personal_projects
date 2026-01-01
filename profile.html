@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | Lakshmi Medical Agency</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-light">
+
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-primary" href="index.html">
+                <i class="fas fa-arrow-left me-2"></i> Back to Home
+            </a>
+            <span class="fw-bold text-dark">User Profile Management</span>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            
+           <div class="col-lg-4 mb-4">
+    <div class="card border-0 shadow-sm text-center p-4">
+        
+        <div class="position-relative mx-auto mb-3" style="width: 120px; height: 120px;">
+            <img src="" id="profileImageDisplay" class="rounded-circle img-thumbnail w-100 h-100 object-fit-cover d-none">
+            
+            <div id="defaultProfileIcon" class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center w-100 h-100" style="font-size: 3rem;">
+                <i class="fas fa-user"></i>
+            </div>
+
+            <label for="fileInput" class="position-absolute bottom-0 end-0 bg-dark text-white rounded-circle p-2 d-none" id="cameraIcon" style="cursor: pointer;">
+                <i class="fas fa-camera small"></i>
+            </label>
+        </div>
+        
+        <input type="file" id="fileInput" accept="image/*" class="d-none">
+
+        <h4 class="fw-bold" id="displayOwnerName">Loading...</h4>
+        <p class="text-muted" id="displayShopName">...</p>
+        <button class="btn btn-danger w-100 mt-3" onclick="logoutUser()">
+            <i class="fas fa-sign-out-alt me-2"></i> Logout
+        </button>
+    </div>
+</div>
+
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-white border-0 py-3 d-flex justify-content-between align-items-center">
+                        <h5 class="fw-bold mb-0 text-primary"><i class="fas fa-user-edit me-2"></i> Account Details</h5>
+                        <button class="btn btn-sm btn-outline-secondary" id="editBtn" onclick="enableEdit()">
+                            <i class="fas fa-pen me-1"></i> Edit
+                        </button>
+                    </div>
+                    <div class="card-body p-4">
+                        <form id="profileForm">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label text-muted small">Owner Name</label>
+                                    <input type="text" class="form-control fw-bold" id="pOwner" disabled>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label text-muted small">Shop / Hospital Name</label>
+                                    <input type="text" class="form-control fw-bold" id="pShop" disabled>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label text-muted small">Email Address (Cannot Change)</label>
+                                    <input type="email" class="form-control bg-light" id="pEmail" disabled readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label text-muted small">License / GST No.</label>
+                                    <input type="text" class="form-control fw-bold" id="pLicense" disabled>
+                                </div>
+                                <div class="col-md-12">
+    <label class="form-label text-muted small">Password</label>
+    <div class="input-group">
+        <input type="password" class="form-control fw-bold" id="pPassword" disabled>
+        <button class="btn btn-outline-secondary" type="button" id="togglePassword" disabled>
+            <i class="fas fa-eye" id="eyeIcon"></i>
+        </button>
+    </div>
+</div>
+                            </div>
+                            
+                            <div class="mt-4 d-none" id="saveBtnContainer">
+                                <button type="submit" class="btn btn-success px-4 fw-bold">Save Changes</button>
+                                <button type="button" class="btn btn-secondary px-4 ms-2" onclick="location.reload()">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+       document.addEventListener("DOMContentLoaded", function () {
+    
+    // ==========================================
+    // 1. GLOBAL CONFIGURATION & UI LOGIC
+    // ==========================================
+    const API = "http://localhost:5000";
+
+    // Navbar Sticky Effect
+    const navbar = document.getElementById("mainNav");
+    if(navbar) {
+        window.addEventListener("scroll", function () {
+            if (window.scrollY > 20) {
+                navbar.classList.add("shadow-md");
+                navbar.style.padding = "10px 0";
+            } else {
+                navbar.classList.remove("shadow-md");
+                navbar.style.padding = "20px 0";
+            }
+        });
+    }
+
+    // Smooth Scroll for Anchor Links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if(targetId === "#") return;
+            
+            const target = document.querySelector(targetId);
+            if(target){
+                const headerOffset = 80;
+                const elementPosition = target.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
+
+                // Close mobile menu if open
+                const navToggler = document.querySelector('.navbar-toggler');
+                const navCollapse = document.querySelector('.navbar-collapse');
+                if (navCollapse && navCollapse.classList.contains('show')) {
+                    navToggler.click();
+                }
+            }
+        });
+    });
+
+    // ==========================================
+    // 2. AUTHENTICATION STATE (NAVBAR UPDATE)
+    // ==========================================
+    
+    // Page load hote hi check karo kaun login hai
+    checkLoginState();
+
+    function checkLoginState() {
+        const savedUser = localStorage.getItem("username");
+        const authLinks = document.getElementById('authLinks');
+        const userProfile = document.getElementById('userProfile');
+        const nameDisplay = document.getElementById('dropdownUserName'); // Profile Dropdown Name
+        const navNameDisplay = document.getElementById('userNameDisplay'); // Old Navbar Name (Backup)
+
+        if (savedUser) {
+            // User Logged In Hai
+            if(authLinks) authLinks.classList.add('d-none');
+            if(userProfile) userProfile.classList.remove('d-none');
+            
+            // Naam update karo
+            if(nameDisplay) nameDisplay.innerText = savedUser;
+            if(navNameDisplay) navNameDisplay.innerText = "Hi, " + savedUser;
+        } else {
+            // User Logged Out Hai
+            if(authLinks) authLinks.classList.remove('d-none');
+            if(userProfile) userProfile.classList.add('d-none');
+        }
+    }
+
+    // ==========================================
+    // 3. HOME PAGE LOGIC (Login/Register/Contact)
+    // ==========================================
+
+    // --- A. LOGIN LOGIC ---
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            try {
+                const res = await fetch(API + '/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const result = await res.json();
+
+                if (result.status === 'ok') {
+                    alert("Welcome " + result.user);
+                    
+                    // Save User Data
+                    localStorage.setItem("username", result.user);
+                    localStorage.setItem("userEmail", email);
+
+                    // Close Modal
+                    const modalEl = document.getElementById('authModal');
+                    const modal = bootstrap.Modal.getInstance(modalEl);
+                    modal.hide();
+
+                    // Update UI
+                    checkLoginState();
+                    location.reload(); // Refresh to ensure state is clean
+                } else {
+                    alert(result.message);
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Server connection failed. Is Node running?");
+            }
+        });
+    }
+
+    // --- B. REGISTER LOGIC ---
+    const registerForm = document.getElementById('registerForm');
+    if (registerForm) {
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = {
+                ownerName: document.getElementById('regName').value,
+                shopName: document.getElementById('regShop').value,
+                email: document.getElementById('regEmail').value,
+                license: document.getElementById('regLicense').value,
+                password: document.getElementById('regPassword').value
+            };
+
+            try {
+                const res = await fetch(API + '/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await res.json();
+                alert(result.message);
+
+                if (result.status === 'ok') {
+                    // Switch to Login View
+                    document.getElementById('registerContainer').classList.add('d-none');
+                    document.getElementById('loginContainer').classList.remove('d-none');
+                }
+            } catch (err) {
+                alert("Registration Failed.");
+            }
+        });
+    }
+
+    // --- C. SWITCH LOGIN/REGISTER VIEWS ---
+    const showRegisterBtn = document.getElementById('showRegister');
+    const showLoginBtn = document.getElementById('showLogin');
+
+    if(showRegisterBtn && showLoginBtn) {
+        showRegisterBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('loginContainer').classList.add('d-none');
+            document.getElementById('registerContainer').classList.remove('d-none');
+        });
+
+        showLoginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('registerContainer').classList.add('d-none');
+            document.getElementById('loginContainer').classList.remove('d-none');
+        });
+    }
+
+    // --- D. CONTACT / INQUIRY FORM ---
+    const inquiryForm = document.getElementById('inquiryForm');
+    if (inquiryForm) {
+        inquiryForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = {
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                shopName: document.getElementById('shop').value,
+                message: document.getElementById('message').value
+            };
+
+            try {
+                const res = await fetch(API + '/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await res.json();
+                alert(result.message);
+                e.target.reset();
+            } catch (err) {
+                alert("Message failed to send.");
+            }
+        });
+    }
+
+
+    // ==========================================
+    // 4. PROFILE PAGE LOGIC (Edit/Update/Photo)
+    // ==========================================
+    
+    // Check if we are on the Profile Page
+    const profileForm = document.getElementById('profileForm');
+    
+    if (profileForm) {
+        const userEmail = localStorage.getItem("userEmail");
+        
+        // 1. Load Data on Page Open
+        if (!userEmail) {
+            alert("Please login first!");
+            window.location.href = "index.html";
+        } else {
+            loadProfileData(userEmail);
+        }
+
+        // 2. Photo Preview Logic
+        const fileInput = document.getElementById('fileInput');
+        if(fileInput) {
+            fileInput.addEventListener('change', function(e) {
+                if(e.target.files && e.target.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const imgDisplay = document.getElementById('profileImageDisplay');
+                        const defaultIcon = document.getElementById('defaultProfileIcon');
+                        
+                        imgDisplay.src = e.target.result;
+                        imgDisplay.classList.remove('d-none');
+                        defaultIcon.classList.add('d-none');
+                    }
+                    reader.readAsDataURL(e.target.files[0]);
+                }
+            });
+        }
+
+        // 3. Password Toggle Logic (Eye Icon)
+        const togglePassBtn = document.getElementById('togglePassword');
+        const passInput = document.getElementById('pPassword');
+        const eyeIcon = document.getElementById('eyeIcon');
+
+        if(togglePassBtn) {
+            togglePassBtn.addEventListener('click', function () {
+                const type = passInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passInput.setAttribute('type', type);
+                eyeIcon.classList.toggle('fa-eye');
+                eyeIcon.classList.toggle('fa-eye-slash');
+            });
+        }
+
+        // 4. Submit Update Form (Supports Photo Upload)
+        profileForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Use FormData for File Uploads
+            const formData = new FormData();
+            formData.append('email', document.getElementById('pEmail').value);
+            formData.append('ownerName', document.getElementById('pOwner').value);
+            formData.append('shopName', document.getElementById('pShop').value);
+            formData.append('license', document.getElementById('pLicense').value);
+            formData.append('password', document.getElementById('pPassword').value);
+
+            if(fileInput && fileInput.files.length > 0) {
+                formData.append('photo', fileInput.files[0]);
+            }
+
+            try {
+                const res = await fetch(API + '/update-user', {
+                    method: 'POST',
+                    body: formData // No Content-Type header needed for FormData
+                });
+
+                const result = await res.json();
+                alert(result.message);
+
+                if (result.status === 'ok') {
+                    localStorage.setItem("username", document.getElementById('pOwner').value);
+                    location.reload();
+                }
+            } catch (err) {
+                alert("Update failed.");
+            }
+        });
+    }
+
+    // Helper: Fetch Profile Data
+    async function loadProfileData(email) {
+        try {
+            const res = await fetch(API + '/user-details', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email })
+            });
+            const data = await res.json();
+
+            if (data.status === 'ok') {
+                const u = data.user;
+                
+                // Set Text Info
+                document.getElementById('displayOwnerName').innerText = u.ownerName;
+                document.getElementById('displayShopName').innerText = u.shopName;
+
+                // Set Inputs
+                document.getElementById('pOwner').value = u.ownerName;
+                document.getElementById('pShop').value = u.shopName;
+                document.getElementById('pEmail').value = u.email;
+                document.getElementById('pLicense').value = u.license || "";
+                document.getElementById('pPassword').value = u.password;
+
+                // Set Photo
+                const imgDisplay = document.getElementById('profileImageDisplay');
+                const defaultIcon = document.getElementById('defaultProfileIcon');
+                
+                if (u.profilePicUrl) {
+                    imgDisplay.src = u.profilePicUrl;
+                    imgDisplay.classList.remove('d-none');
+                    defaultIcon.classList.add('d-none');
+                } else {
+                    imgDisplay.classList.add('d-none');
+                    defaultIcon.classList.remove('d-none');
+                }
+            }
+        } catch (err) {
+            console.error("Profile load error:", err);
+        }
+    }
+
+    // ==========================================
+    // 5. GLOBAL LOGOUT LOGIC
+    // ==========================================
+    const logoutBtn = document.getElementById('logoutBtn');
+    if(logoutBtn) {
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if(confirm("Are you sure you want to logout?")) {
+                localStorage.clear();
+                window.location.href = "index.html"; // Go to home after logout
+            }
+        });
+    }
+});
+
+// Helper Function for Profile Page HTML (needs to be global scope for onclick="enableEdit()")
+function enableEdit() {
+    document.querySelectorAll('#profileForm input').forEach(input => {
+        if(input.id !== 'pEmail') { // Don't enable email
+            input.disabled = false;
+            input.classList.add('border-primary');
+        }
+    });
+    
+    // Show buttons & icons
+    document.getElementById('saveBtnContainer').classList.remove('d-none');
+    document.getElementById('editBtn').classList.add('d-none');
+    
+    const camIcon = document.getElementById('cameraIcon');
+    if(camIcon) camIcon.classList.remove('d-none');
+    
+    const passBtn = document.getElementById('togglePassword');
+    if(passBtn) passBtn.disabled = false;
+}
+    </script>
+</body>
+</html>
